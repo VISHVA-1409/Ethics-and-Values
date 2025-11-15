@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Quiz Mode - Ethics and Values</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f9fafb;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Logo Section */
+        .logo-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #a8c5dd 0%, #b8d4e8 100%);
+            border-radius: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #6b7280;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .card {
+            border-radius: 16px;
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .card.purple {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+        }
+
+        .card.blue {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        }
+
+        .card.green {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        }
+
+        .card.yellow {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+
+        .card.pink {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+        }
+
+        .card.cyan {
+            background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%);
+        }
+
+        .card.orange {
+            background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+        }
+
+        .icon-container {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 36px;
+        }
+
+        .card.purple .icon-container {
+            background: #a78bfa;
+        }
+
+        .card.blue .icon-container {
+            background: #60a5fa;
+        }
+
+        .card.green .icon-container {
+            background: #34d399;
+        }
+
+        .card.yellow .icon-container {
+            background: #fbbf24;
+        }
+
+        .card.pink .icon-container {
+            background: #f472b6;
+        }
+
+        .card.cyan .icon-container {
+            background: #22d3ee;
+        }
+
+        .card.orange .icon-container {
+            background: #fb923c;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .card-description {
+            font-size: 15px;
+            color: #4b5563;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .play-btn {
+            width: 100%;
+            background: #374151;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: auto;
+        }
+
+        .play-btn:hover {
+            background: #1f2937;
+        }
+
+        .play-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e5e7eb;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 26px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .card {
+                padding: 32px 24px;
+            }
+
+            .card-title {
+                font-size: 22px;
+            }
+
+            .section-header {
+                font-size: 20px;
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px;
+            }
+
+            .title {
+                font-size: 24px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            .card {
+                padding: 28px 20px;
+            }
+
+            .icon-container {
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
+            }
+
+            .card-title {
+                font-size: 20px;
+            }
+
+            .card-description {
+                font-size: 14px;
+            }
+
+            .play-btn {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+        }
+        
+    </style>
+            <link rel="icon" href="logo.png" type="image/png">
+
+    
+</head>
+<body>
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <img src="logo.png" alt="EXTRA Logo" class="logo">
+            <img src="vishva.jpg" alt="VIT Logo" class="logo">
+        </div>
+
+        <div class="header">
+            <h1 class="title">Select Assessment Mode</h1>
+            <p class="subtitle">Choose a quiz or MOOC to test your knowledge in Ethics and Values</p>
+        </div>
+
+        <!-- Quizzes Section -->
+        <h2 class="section-header">📝 Quizzes</h2>
+        <div class="grid">
+            <div class="card purple" onclick="window.location.href='quiz1.html'">
+                <div class="icon-container">📋</div>
+                <h3 class="card-title">Quiz 1</h3>
+                <p class="card-description">Ethics Basics & Foundations</p>
+                <button class="play-btn">Start Quiz</button>
+            </div>
+
+            <div class="card blue" onclick="window.location.href='quiz2.html'">
+                <div class="icon-container">📝</div>
+                <h3 class="card-title">Quiz 2</h3>
+                <p class="card-description">Moral Values & Principles</p>
+                <button class="play-btn">Start Quiz</button>
+            </div>
+
+            <div class="card green" onclick="window.location.href='quiz3.html'">
+                <div class="icon-container">✍️</div>
+                <h3 class="card-title">Quiz 3</h3>
+                <p class="card-description">Social Ethics & Conduct</p>
+                <button class="play-btn">Start Quiz</button>
+            </div>
+
+            <div class="card yellow" onclick="window.location.href='quiz4.html'">
+                <div class="icon-container">📄</div>
+                <h3 class="card-title">Quiz 4</h3>
+                <p class="card-description">Professional Ethics</p>
+                <button class="play-btn">Start Quiz</button>
+            </div>
+
+            <div class="card pink" onclick="window.location.href='quiz5.html'">
+                <div class="icon-container">📑</div>
+                <h3 class="card-title">Quiz 5</h3>
+                <p class="card-description">Applied Ethics & Case Studies</p>
+                <button class="play-btn">Start Quiz</button>
+            </div>
+        </div>
+
+        <!-- MOOC Section -->
+        <h2 class="section-header">🎓 MOOC Assessments</h2>
+        <div class="grid">
+            <div class="card cyan" onclick="window.location.href='mooc1.html'">
+                <div class="icon-container">🎯</div>
+                <h3 class="card-title">MOOC 1</h3>
+                <p class="card-description">Comprehensive Ethics Assessment</p>
+                <button class="play-btn">Start Assessment</button>
+            </div>
+
+            <div class="card orange" onclick="window.location.href='mooc2.html'">
+                <div class="icon-container">🏆</div>
+                <h3 class="card-title">MOOC 2</h3>
+                <p class="card-description">Advanced Ethics Evaluation</p>
+                <button class="play-btn">Start Assessment</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openQuiz(quizId) {
+            // You can customize this function to navigate to different quiz pages
+            // For now, it will show an alert
+            alert(`Opening ${quizId.toUpperCase()}...\n\nYou can replace this with navigation to your quiz page.`);
+            
+            // Example: To navigate to a specific quiz page, uncomment below:
+            // window.location.href = quizId + '.html';
+            
+            // Example: To pass quiz ID as parameter
+            // window.location.href = 'quiz.html?id=' + quizId;
+        }
+    </script>
+</body>
+</html>

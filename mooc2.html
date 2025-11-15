@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethics and Values Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f3f4f6;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .header {
+            background: #1f2937;
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .header-icon {
+            font-size: 20px;
+            cursor: pointer;
+            width: 24px;
+            text-align: center;
+        }
+
+        .header-info {
+            flex: 1;
+        }
+
+        .header-title {
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .header-subtitle {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 2px;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        /* Institution Bar */
+        .institution-bar {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .institution-logo {
+            width: 36px;
+            height: 36px;
+            background: #dbeafe;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            color: #2563eb;
+            flex-shrink: 0;
+        }
+
+        .institution-text {
+            font-size: 13px;
+            color: #4b5563;
+            line-height: 1.4;
+        }
+
+        /* Title Bar */
+        .title-bar {
+            background: white;
+            padding: 14px 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .title-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #111827;
+            line-height: 1.5;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        /* Controls Section */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 12px;
+        }
+
+        .back-btn {
+            background: #e5e7eb;
+            color: #374151;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #d1d5db;
+        }
+
+        .timer-box {
+            background: white;
+            padding: 8px 14px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .timer-icon {
+            font-size: 16px;
+        }
+
+        .timer-text {
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .hide-btn {
+            font-size: 11px;
+            color: #2563eb;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+
+        /* Question Card */
+        .question-card {
+            background: #ecfeff;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            border: 1px solid #cffafe;
+        }
+
+        .question-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .question-number {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .not-answered {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .flag-question {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #2563eb;
+            cursor: pointer;
+            padding: 4px 0;
+        }
+
+        .flag-icon {
+            font-size: 14px;
+        }
+
+        .question-text {
+            color: #111827;
+            font-weight: 500;
+            margin: 20px 0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Options Styles */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+
+        .option:hover .option-content {
+            color: #1f2937;
+        }
+
+        .option input[type="radio"] {
+            margin-top: 3px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .option-content {
+            display: flex;
+            gap: 6px;
+            color: #374151;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .option-label {
+            font-weight: 600;
+            min-width: 18px;
+        }
+
+        .option-text {
+            flex: 1;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .next-btn, .finish-btn {
+            padding: 10px 28px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .next-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .next-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .finish-btn {
+            background: #059669;
+            color: white;
+        }
+
+        .finish-btn:hover {
+            background: #047857;
+        }
+
+        /* Quiz Navigation Panel */
+        .quiz-nav {
+            background: white;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            margin-top: 20px;
+        }
+
+        .quiz-nav-title {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .nav-btn {
+            aspect-ratio: 1;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            background: #f9fafb;
+            color: #4b5563;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #e5e7eb;
+            border-color: #9ca3af;
+        }
+
+        .nav-btn.active {
+            background: #1f2937;
+            color: white;
+            border-color: #1f2937;
+        }
+
+        .nav-btn.answered {
+            background: #d1d5db;
+            color: #1f2937;
+            border-color: #9ca3af;
+        }
+
+        .finish-link {
+            font-size: 13px;
+            color: #2563eb;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .finish-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Results Styles */
+        .results-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .results-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        .results-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 20px;
+        }
+
+        .results-score {
+            font-size: 64px;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+
+        .results-text {
+            font-size: 20px;
+            color: #6b7280;
+            margin-bottom: 40px;
+        }
+
+        /* Answer Review */
+        .answer-review {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .answer-item {
+            padding: 18px;
+            border-radius: 6px;
+            border: 2px solid;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .answer-item.correct {
+            border-color: #10b981;
+            background: #d1fae5;
+        }
+
+        .answer-item.incorrect {
+            border-color: #ef4444;
+            background: #fee2e2;
+        }
+
+        .answer-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0;
+            font-size: 16px;
+        }
+
+        .answer-item.correct .answer-number {
+            background: #10b981;
+        }
+
+        .answer-item.incorrect .answer-number {
+            background: #ef4444;
+        }
+
+        .answer-content {
+            flex: 1;
+        }
+
+        .answer-question {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 10px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .answer-detail {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .user-answer {
+            color: #374151;
+            margin-bottom: 4px;
+        }
+
+        .correct-answer {
+            color: #059669;
+            font-weight: 600;
+        }
+
+        .retry-btn {
+            background: #2563eb;
+            color: white;
+            padding: 12px 40px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 40px;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+
+        .retry-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+
+            .question-card {
+                padding: 16px;
+            }
+
+            .results-score {
+                font-size: 48px;
+            }
+
+            .results-title {
+                font-size: 22px;
+            }
+
+            .results-text {
+                font-size: 16px;
+            }
+
+            .nav-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 12px;
+            }
+
+            .controls {
+                flex-wrap: wrap;
+            }
+
+            .timer-box {
+                order: -1;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-grid {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Quiz View -->
+    <div id="quizView">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="header-info">
+                    <div class="header-title">Mooc-2 (page <span id="currentPage">1</span> of 40...)</div>
+                    <div class="header-subtitle">moovitol.vit.ac.in</div>
+                </div>
+            </div>
+           
+        </div>
+
+        <!-- Institution Bar -->
+        <div class="institution-bar">
+            <div class="institution-logo">VIT</div>
+            <div class="institution-text">VITOL - VIT Online Learning Institute</div>
+        </div>
+
+        <!-- Title Bar -->
+        <div class="title-bar">
+            <div class="title-text">IHUM101N Ethics and Values Fall 2025-26 (Prof.SUDHEER C V) [VL2025260104860]</div>
+        </div>
+
+        <!-- Main Container -->
+        <div class="container">
+            <!-- Controls -->
+            <div class="controls">
+                <button class="back-btn">Back</button>
+                <div class="timer-box">
+                    <span class="timer-icon">⏱</span>
+                    <span class="timer-text">Time left: <span id="timer">11:52</span></span>
+                    <button class="hide-btn">Hide</button>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="question-card">
+                <div class="question-meta">
+                    <div class="question-number">Question <span id="questionNum">1</span></div>
+                    <div class="not-answered">Not yet answered</div>
+                    <div class="flag-question">
+                        <span class="flag-icon">⚑</span>
+                        <span>Flag question</span>
+                    </div>
+                </div>
+                
+                <div class="question-text" id="questionText"></div>
+                
+                <div class="options" id="optionsContainer"></div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="nav-buttons">
+                <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next page</button>
+                <button class="finish-btn hidden" id="finishBtn" onclick="finishQuiz()">Finish attempt</button>
+            </div>
+
+            <!-- Quiz Navigation -->
+            <div class="quiz-nav">
+                <div class="quiz-nav-title">Quiz navigation</div>
+                <div class="nav-grid" id="navGrid"></div>
+                <a href="#" class="finish-link" onclick="finishQuiz(); return false;">Finish attempt ...</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results View -->
+    <div id="resultsView" class="hidden">
+        <div class="header">
+            <div class="header-left">
+                <span class="header-icon">←</span>
+                <div class="header-info">
+                    <div class="header-title">Quiz Results</div>
+                    <div class="header-subtitle">moovitol.vit.ac.in</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="header-icon">⇧</span>
+                <span class="header-icon">⋮</span>
+            </div>
+        </div>
+
+        <div class="results-container">
+            <div class="results-card">
+                <h2 class="results-title">Quiz Completed!</h2>
+                <div class="results-score" id="scorePercentage">0%</div>
+                <div class="results-text">You scored <span id="scoreText">0 out of 10</span></div>
+                
+                <div class="answer-review" id="answerReview"></div>
+
+                <button class="retry-btn" onclick="retakeQuiz()">Retake Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    const quizData = [
+  {
+    id: 1,
+    text: "Suppose you are going to attend an interview and an expert in the panel is ready to be bribed. There is only one vacancy and you need the job. What will you do?",
+    options: [
+      { label: "a", text: "Just attend the interview" },
+      { label: "b", text: "Attend with a positive attitude" },
+      { label: "c", text: "Bribe the panel member" },
+      { label: "d", text: "Get recommendation from a political leader" }
+    ],
+    correct: "b"
+  },
+  {
+    id: 2,
+    text: "Identify the correct statement regarding happiness.",
+    options: [
+      { label: "a", text: "Happiness is to maximize profit" },
+      { label: "b", text: "Happiness is to be in a state of competition with others" },
+      { label: "c", text: "Happiness is to be in a state of harmony" },
+      { label: "d", text: "Happiness is to be in a state of luxury" }
+    ],
+    correct: "c"
+  },
+  {
+    id: 3,
+    text: "What to do when you see a road rage accident victim?",
+    options: [
+      { label: "a", text: "Stand and do nothing to avoid unwanted problems" },
+      { label: "b", text: "Take a picture of the accident" },
+      { label: "c", text: "Ignore the situation and walk away" },
+      { label: "d", text: "Try to find help" }
+    ],
+    correct: "d"
+  },
+  {
+    id: 4,
+    text: "Unaccounted money is called:",
+    options: [
+      { label: "a", text: "White money" },
+      { label: "b", text: "Cash" },
+      { label: "c", text: "Currency" },
+      { label: "d", text: "Black money" }
+    ],
+    correct: "d"
+  },
+  {
+    id: 5,
+    text: "Handling depression symptoms due to drug addiction:",
+    options: [
+      { label: "a", text: "Talk to your friends only" },
+      { label: "b", text: "Inform your parents and seek support" },
+      { label: "c", text: "Talk to a counsellor" },
+      { label: "d", text: "Keep quiet fearing the aftermath" }
+    ],
+    correct: "c"
+  },
+  {
+    id: 6,
+    text: "Gandhi developed ______ as practical extension of ahimsa and love.",
+    options: [
+      { label: "a", text: "Satyagraha" },
+      { label: "b", text: "Truth" },
+      { label: "c", text: "Swaraj" },
+      { label: "d", text: "Sarvodaya" }
+    ],
+    correct: "a"
+  },
+  {
+    id: 7,
+    text: "Identify electoral malpractice:",
+    options: [
+      { label: "a", text: "All the given option" },
+      { label: "b", text: "Stealing documents" },
+      { label: "c", text: "Hate speech" },
+      { label: "d", text: "Impersonation" }
+    ],
+    correct: "a"
+  },
+  {
+    id: 8,
+    text: "Irrelevant to the need for a strong and responsible opposition:",
+    options: [
+      { label: "a", text: "To maintain the ethos of a vibrant democracy" },
+      { label: "b", text: "To discourage the activities of the Government" },
+      { label: "c", text: "To showcase an alternative ideology" },
+      { label: "d", text: "To ensure vigilance and monitoring of govt policies" }
+    ],
+    correct: "b"
+  },
+  {
+    id: 9,
+    text: "Data theft statements: Statement I: Data theft is downloading documents with proper permission. Statement II: Data theft is not a cyber-crime.",
+    options: [
+      { label: "a", text: "Both Statement 1 and 2 are false" },
+      { label: "b", text: "Only Statement 2 is True" },
+      { label: "c", text: "Only Statement 1 is True" },
+      { label: "d", text: "Both Statement 1 and 2 are true" }
+    ],
+    correct: "a"
+  },
+  {
+    id: 10,
+    text: "When is it NOT necessary to cite the source?",
+    options: [
+      { label: "a", text: "While writing a personal diary" },
+      { label: "b", text: "When your ideas are built on someone else's" },
+      { label: "c", text: "When paraphrasing someone else’s ideas" },
+      { label: "d", text: "When using someone else’s words" }
+    ],
+    correct: "a"
+  },
+  {
+    id: 11,
+    text: "Abuse of technology – Irrelevant statement: Which among the following statements is irrelevant in defining abuse of technology?",
+    options: [
+      { label: "a", text: "Not realizing the time spent online" },
+      { label: "b", text: "Using internet that creates psychological/social difficulties" },
+      { label: "c", text: "Feeling anxiety/anger when network is weak" },
+      { label: "d", text: "Controlled use of internet" }
+    ],
+    correct: "d"
+  },
+  {
+    id: 12,
+    text: "Data theft statements: Statement I and II (repeat question)",
+    options: [
+      { label: "a", text: "Both Statement 1 and 2 are false" },
+      { label: "b", text: "Only Statement 2 is True" },
+      { label: "c", text: "Only Statement 1 is True" },
+      { label: "d", text: "Both Statement 1 and 2 are true" }
+    ],
+    correct: "a"
+  },
+  {
+    id: 13,
+    text: "Irrelevant to need of strong opposition party:",
+    options: [
+      { label: "a", text: "To maintain the ethos of a vibrant democracy" },
+      { label: "b", text: "To discourage the activities of the Government" },
+      { label: "c", text: "To showcase an alternative ideology" },
+      { label: "d", text: "To ensure vigilance & monitoring of government policies" }
+    ],
+    correct: "b"
+  },
+  {
+    id: 14,
+    text: "When citation is NOT necessary:",
+    options: [
+      { label: "a", text: "While writing a personal diary" },
+      { label: "b", text: "When your ideas are built on someone else’s" },
+      { label: "c", text: "When paraphrasing someone else’s ideas" },
+      { label: "d", text: "When using someone else’s words" }
+    ],
+    correct: "a"
+  },
+  {
+    id: 15,
+    text: "Crimes committed by under-privileged people are called:",
+    options: [
+      { label: "a", text: "White collar crime" },
+      { label: "b", text: "Red collar crime" },
+      { label: "c", text: "Blue collar crime" },
+      { label: "d", text: "Grey collar crime" }
+    ],
+    correct: "c"
+  },
+  {
+    id: 16,
+    text: "Body functions normally only after taking drugs is called:",
+    options: [
+      { label: "a", text: "Physical dependence" },
+      { label: "b", text: "Chemical dependence" },
+      { label: "c", text: "Drug dependence" },
+      { label: "d", text: "Psychological dependence" }
+    ],
+    correct: "b"
+  },
+  {
+    id: 17,
+    text: "Voter ID cards were introduced during the tenure of:",
+    options: [
+      { label: "a", text: "Charan Singh" },
+      { label: "b", text: "S. L. Shakdhar" },
+      { label: "c", text: "T. N. Seshan" },
+      { label: "d", text: "S. Kannan" }
+    ],
+    correct: "c"
+  },
+  {
+    id: 18,
+    text: "HIV statements: Sharing needles with an HIV-positive person is high risk. HIV can be transmitted mother-to-child during pregnancy, birth, breastfeeding.",
+    options: [
+      { label: "a", text: "Only Statement 1 is True" },
+      { label: "b", text: "Both Statement 1 and 2 are false" },
+      { label: "c", text: "Only Statement 2 is True" },
+      { label: "d", text: "Both Statement 1 and 2 are true" }
+    ],
+    correct: "d"
+  },
+  {
+    id: 19,
+    text: "Psychedelic drugs are called:",
+    options: [
+      { label: "a", text: "Stimulant" },
+      { label: "b", text: "Narcotic analgesics" },
+      { label: "c", text: "Depressant" },
+      { label: "d", text: "Hallucinogen" }
+    ],
+    correct: "d"
+  },
+  {
+    id: 20,
+    text: "Structural violence is a ______ state of violence.",
+    options: [
+      { label: "a", text: "Emotional" },
+      { label: "b", text: "Temporary" },
+      { label: "c", text: "Permanent" },
+      { label: "d", text: "Abusive" }
+    ],
+    correct: "c"
+  },
+  {
+    id: 21,
+    text: "When a leader understands organization requirements and strengthens networks to achieve goals, it shows ______.",
+    options: [
+      { label: "a", text: "Communication skills" },
+      { label: "b", text: "Interpersonal skills" },
+      { label: "c", text: "Organization consciousness" },
+      { label: "d", text: "Empowering skills" }
+    ],
+    correct: "c"
+  },
+  {
+    id: 22,
+    text: "Teenage pregnancy statements: Teenage pregnancy helps smooth completion of early education. Teenage pregnancy causes traumatic situations for individuals and families.",
+    options: [
+      { label: "a", text: "Only Statement 1 is True" },
+      { label: "b", text: "Both Statement 1 and 2 are true" },
+      { label: "c", text: "Only Statement 2 is True" },
+      { label: "d", text: "Both Statement 1 and 2 are false" }
+    ],
+    correct: "c"
+  },
+  {
+    id: 23,
+    text: "Identify a social value:",
+    options: [
+      { label: "a", text: "Happiness" },
+      { label: "b", text: "Democracy" },
+      { label: "c", text: "Trust" },
+      { label: "d", text: "Love" }
+    ],
+    correct: "b"
+  },
+  {
+    id: 24,
+    text: "First effort for electoral reforms chaired by:",
+    options: [
+      { label: "a", text: "Sri V. M. Tarkunde" },
+      { label: "b", text: "Sri Jayaprakash Narayan" },
+      { label: "c", text: "Sri Jagannath Rao" },
+      { label: "d", text: "Sri Charan Singh" }
+    ],
+    correct: "b"
+  },
+  {
+    id: 25,
+    text: "Electronic-device harassment:",
+    options: [
+      { label: "a", text: "Cyber stalking" },
+      { label: "b", text: "Cyber bullying" },
+      { label: "c", text: "Cyber grooming" },
+      { label: "d", text: "Smishing" }
+    ],
+    correct: "b"
+  },
+  {
+    id: 26,
+    text: "Mythological character who impressed Gandhi:",
+    options: [
+      { label: "a", text: "Krishna" },
+      { label: "b", text: "Harichandra" },
+      { label: "c", text: "Ashoka" },
+      { label: "d", text: "Vikramaditya" }
+    ],
+    correct: "b"
+  },
+  {
+    id: 27,
+    text: "Peer pressure statements: A person who admires diversity easily falls to peer pressure; Peer pressure can occur without spoken words.",
+    options: [
+      { label: "a", text: "Only Statement 1 is True" },
+      { label: "b", text: "Both Statement 1 and 2 are true" },
+      { label: "c", text: "Only Statement 2 is True" },
+      { label: "d", text: "Both Statement 1 and 2 are false" }
+    ],
+    correct: "b"
+  },
+  {
+    id: 28,
+    text: "Meaning of 'Hacking':",
+    options: [
+      { label: "a", text: "Downloading documents without permission" },
+      { label: "b", text: "Use of ICT for hostile behaviour" },
+      { label: "c", text: "Unauthorized attempts to bypass security mechanisms" },
+      { label: "d", text: "Identity pretending fraud" }
+    ],
+    correct: "c"
+  },
+  {
+    id: 29,
+    text: "Education & sexual health – statements: Proper sex education is essential for awareness; Do NOT encourage open discussion in families.",
+    options: [
+      { label: "a", text: "Both Statement 1 and 2 are false" },
+      { label: "b", text: "Only Statement 2 is True" },
+      { label: "c", text: "Only Statement 1 is True" },
+      { label: "d", text: "Both Statement 1 and 2 are true" }
+    ],
+    correct: "c"
+  },
+  {
+    id: 30,
+    text: "Alcoholism includes the following EXCEPT:",
+    options: [
+      { label: "a", text: "Drinker spends entire income" },
+      { label: "b", text: "Social and economic life gets affected" },
+      { label: "c", text: "Health gets deteriorated" },
+      { label: "d", text: "Drinking exceeds customary limits" }
+    ],
+    correct: "d"
+  },
+  {
+    id: 31,
+    text: "Online financial fraud through website duplication is called:",
+    options: [
+      { label: "a", text: "Phishing" },
+      { label: "b", text: "Spamming" },
+      { label: "c", text: "Cyber bullying" },
+      { label: "d", text: "Hacking" }
+    ],
+    correct: "a"
+  },
+  {
+    id: 32,
+    text: "Transparency in government process strengthened by:",
+    options: [
+      { label: "a", text: "Prohibition of Child Marriage Act, 2006" },
+      { label: "b", text: "Lokayukta Act, 2013" },
+      { label: "c", text: "Right to Information Act, 2005" },
+      { label: "d", text: "Prevention of Corruption Act, 1988" }
+    ],
+    correct: "c"
+  },
+  {
+    id: 33,
+    text: "Initiative leading to adolescent-friendly health clinics:",
+    options: [
+      { label: "a", text: "Rashtriya Madhyamik Shiksha Abhiyan" },
+      { label: "b", text: "National Family Planning Programme" },
+      { label: "c", text: "National Health Mission" },
+      { label: "d", text: "National Adolescent Health Programme" }
+    ],
+    correct: "d"
+  },
+  {
+    id: 34,
+    text: "What causes a polarized society?",
+    options: [
+      { label: "a", text: "Penetration" },
+      { label: "b", text: "Segmentation and Fragmentation" },
+      { label: "c", text: "Exploitation" },
+      { label: "d", text: "Marginalization and Fragmentation" }
+    ],
+    correct: "d"
+  },
+  {
+    id: 35,
+    text: "NOT a factor motivating youngsters to yield to peer pressure:",
+    options: [
+      { label: "a", text: "Because they want to be unique and succeed in life" },
+      { label: "b", text: "Fear others might make fun" },
+      { label: "c", text: "Wanting to be liked" },
+      { label: "d", text: "Curiosity to try new things" }
+    ],
+    correct: "a"
+  },
+  {
+    id: 36,
+    text: "Extra marks awarded by mistake — what should you do?",
+    options: [
+      { label: "a", text: "Keep the marks to yourself" },
+      { label: "b", text: "Keep marks because it wasn’t your mistake" },
+      { label: "c", text: "None" },
+      { label: "d", text: "Keep quiet" },
+      { label: "e", text: "Inform the teacher and accept consequences" }
+    ],
+    correct: "e"
+  },
+  {
+    id: 37,
+    text: "Structural violence results from ______ relations:",
+    options: [
+      { label: "a", text: "Hierarchical" },
+      { label: "b", text: "Complex" },
+      { label: "c", text: "Economic" },
+      { label: "d", text: "Social" }
+    ],
+    correct: "a"
+  },
+  {
+    id: 38,
+    text: "Salesperson taking store money secretly is called:",
+    options: [
+      { label: "a", text: "Patronage" },
+      { label: "b", text: "Embezzlement" },
+      { label: "c", text: "Nepotism" },
+      { label: "d", text: "Bribery" }
+    ],
+    correct: "b"
+  },
+  {
+    id: 39,
+    text: "Last stage of liver disease from heavy alcohol use:",
+    options: [
+      { label: "a", text: "Hypertension" },
+      { label: "b", text: "Fatal Alcohol Syndrome" },
+      { label: "c", text: "Alcoholic Hepatitis" },
+      { label: "d", text: "Cirrhosis" }
+    ],
+    correct: "d"
+  },
+  {
+    id: 40,
+    text: "SMS used to steal sensitive information is called:",
+    options: [
+      { label: "a", text: "Hacking" },
+      { label: "b", text: "Phishing" },
+      { label: "c", text: "Cyber-terrorism" },
+      { label: "d", text: "Smishing" }
+    ],
+    correct: "d"
+  }
+];
+
+
+
+        let currentQuestion = 0;
+        let answers = {};
+        let timeLeft = 712;
+
+        function init() {
+            renderQuestion();
+            renderNavigation();
+            startTimer();
+        }
+
+        function renderQuestion() {
+            const question = quizData[currentQuestion];
+            document.getElementById('currentPage').textContent = currentQuestion + 1;
+            document.getElementById('questionNum').textContent = question.id;
+            document.getElementById('questionText').textContent = question.text;
+
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach(option => {
+                const optionDiv = document.createElement('label');
+                optionDiv.className = 'option';
+                optionDiv.innerHTML = `
+                    <input type="radio" name="question${question.id}" value="${option.label}" 
+                        ${answers[currentQuestion] === option.label ? 'checked' : ''} 
+                        onchange="handleAnswer('${option.label}')">
+                    <div class="option-content">
+                        <span class="option-label">${option.label}.</span>
+                        <span class="option-text">${option.text}</span>
+                    </div>
+                `;
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            if (currentQuestion === quizData.length - 1) {
+                document.getElementById('nextBtn').classList.add('hidden');
+                document.getElementById('finishBtn').classList.remove('hidden');
+            } else {
+                document.getElementById('nextBtn').classList.remove('hidden');
+                document.getElementById('finishBtn').classList.add('hidden');
+            }
+        }
+
+        function renderNavigation() {
+            const navGrid = document.getElementById('navGrid');
+            navGrid.innerHTML = '';
+
+            quizData.forEach((q, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'nav-btn';
+                btn.textContent = q.id;
+                btn.onclick = () => goToQuestion(index);
+                
+                if (index === currentQuestion) {
+                    btn.classList.add('active');
+                } else if (answers[index] !== undefined) {
+                    btn.classList.add('answered');
+                }
+                
+                navGrid.appendChild(btn);
+            });
+        }
+
+        function handleAnswer(optionLabel) {
+            answers[currentQuestion] = optionLabel;
+            renderNavigation();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+                renderNavigation();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function goToQuestion(index) {
+            currentQuestion = index;
+            renderQuestion();
+            renderNavigation();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function finishQuiz() {
+            document.getElementById('quizView').classList.add('hidden');
+            document.getElementById('resultsView').classList.remove('hidden');
+            showResults();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showResults() {
+            let correct = 0;
+            quizData.forEach((q, index) => {
+                if (answers[index] === q.correct) {
+                    correct++;
+                }
+            });
+
+            const percentage = ((correct / quizData.length) * 100).toFixed(1);
+            document.getElementById('scorePercentage').textContent = percentage + '%';
+            document.getElementById('scoreText').textContent = `${correct} out of ${quizData.length}`;
+
+            const reviewContainer = document.getElementById('answerReview');
+            reviewContainer.innerHTML = '';
+
+            quizData.forEach((q, index) => {
+                const userAnswer = answers[index];
+                const isCorrect = userAnswer === q.correct;
+                
+                const answerDiv = document.createElement('div');
+                answerDiv.className = `answer-item ${isCorrect ? 'correct' : 'incorrect'}`;
+                
+                const correctOption = q.options.find(o => o.label === q.correct);
+                const userOption = q.options.find(o => o.label === userAnswer);
+                
+                answerDiv.innerHTML = `
+                    <div class="answer-number">${index + 1}</div>
+                    <div class="answer-content">
+                        <div class="answer-question">${q.text}</div>
+                        <div class="answer-detail">
+                            <div class="user-answer">Your answer: ${userAnswer ? userOption.text : 'Not answered'}</div>
+                            ${!isCorrect ? `<div class="correct-answer">Correct answer: ${correctOption.text}</div>` : ''}
+                        </div>
+                    </div>
+                `;
+                
+                reviewContainer.appendChild(answerDiv);
+            });
+        }
+
+        function retakeQuiz() {
+            currentQuestion = 0;
+            answers = {};
+            timeLeft = 712;
+            document.getElementById('resultsView').classList.add('hidden');
+            document.getElementById('quizView').classList.remove('hidden');
+            renderQuestion();
+            renderNavigation();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startTimer() {
+            setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    const mins = Math.floor(timeLeft / 60);
+                    const secs = timeLeft % 60;
+                    document.getElementById('timer').textContent = 
+                        `${mins}:${secs.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
+        // Initialize the quiz when page loads
+        init();
+    </script>
+</body>
+</html>
